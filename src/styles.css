@@ -191,6 +191,11 @@
   50% { transform: translateY(-6px) rotate(-1deg); }
 }
 
+@keyframes day-check-in {
+  from { opacity: 0; transform: translateY(8px) scale(0.88); }
+  to { opacity: 1; transform: translateY(0) scale(1); }
+}
+
 .landing-shell {
   background-image:
     linear-gradient(to right, color-mix(in oklab, var(--primary) 5%, transparent) 1px, transparent 1px),
@@ -208,6 +213,19 @@
 .streak-flame { transition: transform 250ms ease; }
 .preview-card:hover .streak-flame { transform: scale(1.08) rotate(-6deg); }
 .feature-tile { border-radius: var(--radius-xl); border: 1px solid var(--border); overflow: hidden; }
+.auth-visual::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background-image:
+    linear-gradient(to right, color-mix(in oklab, var(--primary-foreground) 10%, transparent) 1px, transparent 1px),
+    linear-gradient(to bottom, color-mix(in oklab, var(--primary-foreground) 10%, transparent) 1px, transparent 1px);
+  background-size: 48px 48px;
+  mask-image: linear-gradient(to bottom, transparent, black 20%, black 80%, transparent);
+}
+.auth-form { animation: landing-rise 600ms ease-out both; }
+.auth-day { opacity: 0; animation: day-check-in 420ms ease-out forwards; }
+.auth-flame { animation: note-drift 4.5s ease-in-out infinite; }
 
 @media (prefers-reduced-motion: reduce) {
   .landing-copy,
@@ -217,6 +235,13 @@
   .progress-fill,
   .floating-note,
   .floating-streak {
+    animation: none;
+    opacity: 1;
+    transform: none;
+  }
+  .auth-form,
+  .auth-day,
+  .auth-flame {
     animation: none;
     opacity: 1;
     transform: none;
